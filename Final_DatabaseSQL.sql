@@ -1,21 +1,21 @@
 -- HOTEL TABLE
-CREATE TABLE HOTEL (id INT AUTO_INCREMENT,
+CREATE TABLE HOTEL (
  hotelNum varchar(255),
  address varchar(255),
  city varchar(255),
  state varchar(255),
  zipcode varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (hotelNum));
 
  INSERT INTO HOTEL (hotelNum, address, city, state, zipcode) VALUES  ("4638428", "65733 Juwan Hill", "Port Carolinaview", "Montana", "69917-8696");
 
 -- EMPLOYEE TABLE
-CREATE TABLE EMPLOYEE (id INT AUTO_INCREMENT,
+CREATE TABLE EMPLOYEE (
  employeeNum varchar(255),
  wage varchar(255),
  jobNum varchar(255),
  floorNum varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (employeeNum));
 
 START TRANSACTION;
  INSERT INTO EMPLOYEE (employeeNum, wage, jobNum, floorNum) VALUES  ("2012689240", "10.00", "1915065909", "NULL");
@@ -38,7 +38,7 @@ START TRANSACTION;
 COMMIT;
 
 -- EVENT TABLE
-CREATE TABLE EVENT (id INT AUTO_INCREMENT,
+CREATE TABLE EVENT (
  eventNum varchar(255),
  eventType varchar(255),
  location varchar(255),
@@ -46,7 +46,7 @@ CREATE TABLE EVENT (id INT AUTO_INCREMENT,
  time varchar(255),
  resNum varchar(255),
  employeeNum varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (eventNum));
 
 START TRANSACTION;
  INSERT INTO EVENT (eventNum, eventType, location, date, time, resNum, employeeNum) VALUES  ("1801416930", "non", "nam", "2001-04-06", "22:32:35", "1879494939", "1669996248");
@@ -55,10 +55,10 @@ START TRANSACTION;
 COMMIT;
 
 -- JOB TABLE
-CREATE TABLE JOB (id INT AUTO_INCREMENT,
+CREATE TABLE JOB (
  jobNum varchar(255),
  jobTitle varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (jobNum));
 
 START TRANSACTION;
  INSERT INTO JOB (jobNum, jobTitle) VALUES  ("1915065909", "Valet Attendant");
@@ -70,12 +70,12 @@ START TRANSACTION;
 COMMIT;
 
 -- ROOMTYPE TABLE
-CREATE TABLE ROOMTYPE (id INT AUTO_INCREMENT,
+CREATE TABLE ROOMTYPE (
  typeNum varchar(255),
  description varchar(255),
  maxNumGuests varchar(255),
  cost varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (typeNum));
 
 START TRANSACTION;
  INSERT INTO ROOMTYPE (typeNum, description, maxNumGuests, cost) VALUES  ("2134750372", "Single Room - 1 King Bed", "2", "100.00");
@@ -84,12 +84,12 @@ START TRANSACTION;
 COMMIT;
 
 -- PAYMENT TABLE
-CREATE TABLE PAYMENT (id INT AUTO_INCREMENT,
+CREATE TABLE PAYMENT (
  paymentNum varchar(255),
  guestNum varchar(255),
  resNum varchar(255),
  total varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (paymentNum));
 
 START TRANSACTION;
  INSERT INTO PAYMENT (paymentNum, guestNum, resNum, total) VALUES  ("1636497606", "1613364770", "719726322", "510.22");
@@ -100,7 +100,7 @@ START TRANSACTION;
 COMMIT;
 
 -- GUEST TABLE
-CREATE TABLE GUEST (id INT AUTO_INCREMENT,
+CREATE TABLE GUEST (
  guestNum varchar(255),
  resNum varchar(255),
  FName varchar(255),
@@ -113,7 +113,7 @@ CREATE TABLE GUEST (id INT AUTO_INCREMENT,
  city varchar(255),
  state varchar(255),
  zipcode varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (guestNum));
 
 START TRANSACTION;
  INSERT INTO GUEST (guestNum, resNum, FName, LName, carType, licensePlate, phone, email, address, city, state, zipcode) VALUES  ("1613364770", "719726322", "Benton", "Ernser", "Ford Focus", "4B4-221", "(862)542-7482", "ashtyn97@huels.com", "42866 Bernier Creek", "Herminaview", "Oklahoma", "65177");
@@ -124,13 +124,13 @@ START TRANSACTION;
 COMMIT;
 
 -- RESERVATION TABLE
-CREATE TABLE RESERVATION (id INT AUTO_INCREMENT,
+CREATE TABLE RESERVATION (
  resNum varchar(255),
  guestNum varchar(255),
  checkIn varchar(255),
  checkOut varchar(255),
  roomNum varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (resNum));
 
 START TRANSACTION;
  INSERT INTO RESERVATION (resNum, guestNum, checkIn, checkOut, roomNum) VALUES  ("719726322", "1613364770", "2019-04-15", "2019-04-20", "101");
@@ -141,12 +141,12 @@ START TRANSACTION;
 COMMIT;
 
 -- ROOM TABLE
-CREATE TABLE ROOM (id INT AUTO_INCREMENT,
+CREATE TABLE ROOM (
  roomNum varchar(255),
  typeNum varchar(255),
  floorNum varchar(255),
  cleaned varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (roomNum));
 
 START TRANSACTION;
  INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("101", "2134750372", "1", "0");
@@ -165,10 +165,10 @@ START TRANSACTION;
 COMMIT;
 
 -- FLOOR TABLE
-CREATE TABLE FLOOR (id INT AUTO_INCREMENT,
+CREATE TABLE FLOOR (
  floorNum varchar(255),
  restaurantNum varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (floorNum));
 
 START TRANSACTION;
  INSERT INTO FLOOR (floorNum, restaurantNum) VALUES  ("1", "1993739448");
@@ -177,11 +177,11 @@ START TRANSACTION;
 COMMIT;
 
 -- VALET TABLE
-CREATE TABLE VALET (id INT AUTO_INCREMENT,
+CREATE TABLE VALET (
  ticketNum varchar(255),
  lotNum varchar(255),
  spotNum varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (ticketNum));
 
 START TRANSACTION;
  INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("651501065", "1", "111");
@@ -199,12 +199,12 @@ START TRANSACTION;
 COMMIT;
 
 -- MENU TABLE
-CREATE TABLE MENU (id INT AUTO_INCREMENT,
+CREATE TABLE MENU (
  menuNum varchar(255),
  appetizer varchar(255),
  entre varchar(255),
  dessert varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (menuNum));
 
 START TRANSACTION;
  INSERT INTO MENU (menuNum, appetizer, entre, dessert) VALUES  ("1118202231", "Fried Calamari", "Chicken Alfredo", "NY Cheesecake");
@@ -213,11 +213,11 @@ START TRANSACTION;
 COMMIT;
 
 -- RESTAURANT TABLE
-CREATE TABLE RESTAURANT (id INT AUTO_INCREMENT,
+CREATE TABLE RESTAURANT (
  restaurantNum varchar(255),
  restaurantName varchar(255),
  menuNum varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (restaurantNum));
 
 START TRANSACTION;
  INSERT INTO RESTAURANT (restaurantNum, restaurantName, menuNum) VALUES  ("1993739448", "La Cucina", "1118202231");
@@ -226,11 +226,11 @@ START TRANSACTION;
 COMMIT;
 
 -- ROOMSERVICE TABLE
-CREATE TABLE ROOMSERVICE (id INT AUTO_INCREMENT,
+CREATE TABLE ROOMSERVICE (
  orderNum varchar(255),
  roomNum varchar(255),
  restaurantNum varchar(255),
- PRIMARY KEY (id));
+ PRIMARY KEY (orderNum));
 
 START TRANSACTION;
  INSERT INTO ROOMSERVICE (orderNum, roomNum, restaurantNum) VALUES  ("289179810", "101", "1993739448");
