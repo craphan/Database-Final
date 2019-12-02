@@ -176,18 +176,6 @@ START TRANSACTION;
  INSERT INTO FLOOR (floorNum, restaurantNum) VALUES  ("2", "845405183");
 COMMIT;
 
--- PARKINGLOT TABLE
-CREATE TABLE PARKINGLOT (id INT AUTO_INCREMENT,
- lotNum varchar(255),
- totalSpots varchar(255),
- employeeNum varchar(255),
- PRIMARY KEY (id));
-
-START TRANSACTION;
- INSERT INTO PARKINGLOT (lotNum, spotNum, guestNum, employeeNum) VALUES  ("1", "20", "1140395978");
- INSERT INTO PARKINGLOT (lotNum, spotNum, guestNum, employeeNum) VALUES  ("2", "20", "1086852048");
-COMMIT;
-
 -- VALET TABLE
 CREATE TABLE VALET (id INT AUTO_INCREMENT,
  ticketNum varchar(255),
