@@ -1,0 +1,58 @@
+Business Rules:
+
+One guest stays in only one room;
+One room can have zero to many guests.
+
+One restaurant is located in only one hotel;
+One hotel has one to many restaurants. 
+
+One room belongs to only one hotel;
+One hotel has one to many rooms.
+
+One parking lot can belong to only one hotel;
+One hotel has one to many parking lots.
+
+Each employee is assigned only one job;
+Each job can be assigned to one to many employees.
+
+Each guest pays only one payment;
+Each payment belongs to only one guest.
+
+Each guest makes one to many reservations;
+Each reservation belongs to one guest.
+
+Each restaurant has only one menu;
+Each menu belongs to one restaurant.
+
+One room service serves to one room;
+Each room can order zero to many room services.
+
+Each room service belongs to only one restaurant;
+Each restaurant serves one to many room services.
+
+Each event belongs to one reservation;
+Each reservation consists of one event.
+
+One employee works at one event;
+Each event has one to many workers.
+
+Each event is held at one hotel; 
+One hotel hosts one to many events.
+
+Each room has only one room type;
+One room type belongs to one to many rooms.
+
+One valet belongs to one guest;
+One guest has one valet.
+
+One floor belongs to one hotel;
+One hotel has one to many floors.
+
+Each room is on one floor;
+Each floor has one to many rooms.
+
+One employee can work at one restaurant; 
+Each restaurant has one to many employees.
+
+One guest dines at one restaurant;
+Each restaurant seats zero to many guests.
