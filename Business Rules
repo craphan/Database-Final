@@ -53,3 +53,6 @@ Each restaurant has one to many employees.
 
 One guest dines at one restaurant;
 Each restaurant seats zero to many guests.
+
+One guest orders one to many room service;
+Room service serves zero to many guests.
