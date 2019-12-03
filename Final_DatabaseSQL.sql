@@ -1,20 +1,20 @@
 -- HOTEL TABLE
 CREATE TABLE HOTEL (
- hotelNum varchar(255),
- address varchar(255),
- city varchar(255),
- state varchar(255),
- zipcode varchar(255),
+ hotelNum varchar(4),
+ address varchar(30),
+ city varchar(30),
+ state varchar(20),
+ zipcode varchar(15),
  PRIMARY KEY (hotelNum));
 
  INSERT INTO HOTEL (hotelNum, address, city, state, zipcode) VALUES  ("4638428", "65733 Juwan Hill", "Port Carolinaview", "Montana", "69917-8696");
 
 -- EMPLOYEE TABLE
 CREATE TABLE EMPLOYEE (
- employeeNum varchar(255),
- wage varchar(255),
- jobNum varchar(255),
- floorNum varchar(255),
+ employeeNum varchar(15),
+ wage float,
+ jobNum varchar(15),
+ floorNum varchar(4),
  PRIMARY KEY (employeeNum),
  FOREIGN KEY (jobNum) REFERENCES JOB,
  FOREIGN KEY (floorNum) REFERENCES FLOOR);
@@ -41,27 +41,27 @@ COMMIT;
 
 -- EVENT TABLE
 CREATE TABLE EVENT (
- eventNum varchar(255),
- eventType varchar(255),
- location varchar(255),
- date varchar(255),
- time varchar(255),
- resNum varchar(255),
- employeeNum varchar(255),
+ eventNum varchar(15),
+ eventType varchar(30),
+ location varchar(30),
+ eventDate date,
+ eventTime time,
+ resNum varchar(15),
+ employeeNum varchar(15),
  PRIMARY KEY (eventNum),
  FOREIGN KEY (resNum) REFERENCES RESERVATION,
  FOREIGN KEY (employeeNum) REFERENCES EMPLOYEE);
 
 START TRANSACTION;
- INSERT INTO EVENT (eventNum, eventType, location, date, time, resNum, employeeNum) VALUES  ("1801416930", "non", "nam", "2001-04-06", "22:32:35", "1879494939", "1669996248");
- INSERT INTO EVENT (eventNum, eventType, location, date, time, resNum, employeeNum) VALUES  ("1997502070", "maiores", "asperiores", "1978-08-14", "02:09:53", "1565769581", "789076410");
- INSERT INTO EVENT (eventNum, eventType, location, date, time, resNum, employeeNum) VALUES  ("891133523", "architecto", "eius", "2016-11-08", "12:07:34", "1757701406", "1164530717");
+ INSERT INTO EVENT (eventNum, eventType, location, eventDate, eventTime, resNum, employeeNum) VALUES  ("1801416930", "non", "nam", "2001-04-06", "22:32:35", "1879494939", "1669996248");
+ INSERT INTO EVENT (eventNum, eventType, location, eventDate, eventTime, resNum, employeeNum) VALUES  ("1997502070", "maiores", "asperiores", "1978-08-14", "02:09:53", "1565769581", "789076410");
+ INSERT INTO EVENT (eventNum, eventType, location, eventDate, eventTime, resNum, employeeNum) VALUES  ("891133523", "architecto", "eius", "2016-11-08", "12:07:34", "1757701406", "1164530717");
 COMMIT;
 
 -- JOB TABLE
 CREATE TABLE JOB (
- jobNum varchar(255),
- jobTitle varchar(255),
+ jobNum varchar(15),
+ jobTitle varchar(30),
  PRIMARY KEY (jobNum));
 
 START TRANSACTION;
@@ -75,10 +75,10 @@ COMMIT;
 
 -- ROOMTYPE TABLE
 CREATE TABLE ROOMTYPE (
- typeNum varchar(255),
- description varchar(255),
- maxNumGuests varchar(255),
- cost varchar(255),
+ typeNum varchar(15),
+ description varchar(30),
+ maxNumGuests smallint,
+ cost float,
  PRIMARY KEY (typeNum));
 
 START TRANSACTION;
@@ -89,10 +89,10 @@ COMMIT;
 
 -- PAYMENT TABLE
 CREATE TABLE PAYMENT (
- paymentNum varchar(255),
- guestNum varchar(255),
- resNum varchar(255),
- total varchar(255),
+ paymentNum varchar(15),
+ guestNum varchar(15),
+ resNum varchar(15),
+ total float,
  PRIMARY KEY (paymentNum),
  FOREIGN KEY (guestNum) REFERENCES GUEST,
  FOREIGN KEY (resNum) REFERENCES RESERVATION);
@@ -107,17 +107,17 @@ COMMIT;
 
 -- GUEST TABLE
 CREATE TABLE GUEST (
- guestNum varchar(255),
- resNum varchar(255),
- FName varchar(255),
- LName varchar(255),
- ticketNum varchar(255),
- phone varchar(255),
- email varchar(255),
- address varchar(255),
- city varchar(255),
- state varchar(255),
- zipcode varchar(255),
+ guestNum varchar(15),
+ resNum varchar(15),
+ FName varchar(30),
+ LName varchar(30),
+ ticketNum varchar(15),
+ phone varchar(15),
+ email varchar(40),
+ address varchar(30),
+ city varchar(30),
+ state varchar(20),
+ zipcode varchar(15),
  PRIMARY KEY (guestNum),
  FOREIGN KEY (resNum) REFERENCES RESERVATION,
  FOREIGN KEY (ticketNum) REFERENCES VALETSERVICE);
@@ -132,11 +132,11 @@ COMMIT;
 
 -- RESERVATION TABLE
 CREATE TABLE RESERVATION (
- resNum varchar(255),
- guestNum varchar(255),
- checkIn varchar(255),
- checkOut varchar(255),
- roomNum varchar(255),
+ resNum varchar(15),
+ guestNum varchar(15),
+ checkIn date,
+ checkOut date),
+ roomNum varchar(4),
  PRIMARY KEY (resNum),
  FOREIGN KEY (guestNum) REFERENCES GUEST,
  FOREIGN KEY (roomNum) REFERENCES ROOM);
@@ -151,11 +151,11 @@ COMMIT;
 
 -- ROOM TABLE
 CREATE TABLE ROOM (
- roomNum varchar(255),
- typeNum varchar(255),
- floorNum varchar(255),
- cleaned varchar(255),
- resNum varchar(255),
+ roomNum varchar(15),
+ typeNum varchar(15),
+ floorNum varchar(4),
+ cleaned BOOL,
+ resNum varchar(15),
  PRIMARY KEY (roomNum),
  FOREIGN KEY (typeNum) REFERENCES ROOMTYPE,
  FOREIGN KEY (floorNum) REFERENCES FLOOR,
@@ -179,8 +179,8 @@ COMMIT;
 
 -- FLOOR TABLE
 CREATE TABLE FLOOR (
- floorNum varchar(255),
- hotelNum varchar(255),
+ floorNum varchar(4),
+ hotelNum varchar(4),
  PRIMARY KEY (floorNum),
  FOREIGN KEY (hotelNum) REFERENCES HOTEL);
 
@@ -192,10 +192,10 @@ COMMIT;
 
 -- VALETSERVICE TABLE
 CREATE TABLE VALETSERVICE (
- ticketNum varchar(255),
- lotNum varchar(255),
- spotNum varchar(255),
- price FLOAT,
+ ticketNum varchar(15),
+ lotNum varchar(15),
+ spotNum varchar(15),
+ price float,
  PRIMARY KEY (ticketNum));
 
 START TRANSACTION;
@@ -215,10 +215,10 @@ COMMIT;
 
 -- MENU TABLE
 CREATE TABLE MENU (
- menuNum varchar(255),
- appetizer varchar(255),
- entre varchar(255),
- dessert varchar(255),
+ menuNum varchar(15),
+ appetizer varchar(40),
+ entre varchar(40),
+ dessert varchar(40),
  PRIMARY KEY (menuNum));
 
 START TRANSACTION;
@@ -229,11 +229,11 @@ COMMIT;
 
 -- RESTAURANT TABLE
 CREATE TABLE RESTAURANT (
- restaurantNum varchar(255),
- restaurantName varchar(255),
- menuNum varchar(255),
- floorNum varchar(255),
- employeeNum varchar(255),
+ restaurantNum varchar(15),
+ restaurantName varchar(40),
+ menuNum varchar(15),
+ floorNum varchar(4),
+ employeeNum varchar(15),
  PRIMARY KEY (restaurantNum),
  FOREIGN KEY (floorNum) REFERENCES FLOOR,
  FOREIGN KEY (employeeNum) REFERENCES EMPLOYEE);
@@ -246,9 +246,9 @@ COMMIT;
 
 -- ROOMSERVICE TABLE
 CREATE TABLE ROOMSERVICE (
- orderNum varchar(255),
- roomNum varchar(255),
- restaurantNum varchar(255),
+ orderNum varchar(15),
+ roomNum varchar(15),
+ restaurantNum varchar(15),
  PRIMARY KEY (orderNum),
  FOREIGN KEY (roomNum) REFERENCES ROOM,
  FOREIGN KEY (restaurantNum) REFERENCES RESTAURANT);
