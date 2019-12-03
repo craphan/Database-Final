@@ -15,7 +15,9 @@ CREATE TABLE EMPLOYEE (
  wage varchar(255),
  jobNum varchar(255),
  floorNum varchar(255),
- PRIMARY KEY (employeeNum));
+ PRIMARY KEY (employeeNum),
+ FOREIGN KEY (jobNum) REFERENCES JOB,
+ FOREIGN KEY (floorNum) REFERENCES FLOOR);
 
 START TRANSACTION;
  INSERT INTO EMPLOYEE (employeeNum, wage, jobNum, floorNum) VALUES  ("2012689240", "10.00", "1915065909", "NULL");
@@ -46,7 +48,9 @@ CREATE TABLE EVENT (
  time varchar(255),
  resNum varchar(255),
  employeeNum varchar(255),
- PRIMARY KEY (eventNum));
+ PRIMARY KEY (eventNum),
+ FOREIGN KEY (resNum) REFERENCES RESERVATION,
+ FOREIGN KEY (employeeNum) REFERENCES EMPLOYEE);
 
 START TRANSACTION;
  INSERT INTO EVENT (eventNum, eventType, location, date, time, resNum, employeeNum) VALUES  ("1801416930", "non", "nam", "2001-04-06", "22:32:35", "1879494939", "1669996248");
@@ -89,7 +93,9 @@ CREATE TABLE PAYMENT (
  guestNum varchar(255),
  resNum varchar(255),
  total varchar(255),
- PRIMARY KEY (paymentNum));
+ PRIMARY KEY (paymentNum),
+ FOREIGN KEY (guestNum) REFERENCES GUEST,
+ FOREIGN KEY (resNum) REFERENCES RESERVATION);
 
 START TRANSACTION;
  INSERT INTO PAYMENT (paymentNum, guestNum, resNum, total) VALUES  ("1636497606", "1613364770", "719726322", "510.22");
@@ -105,22 +111,23 @@ CREATE TABLE GUEST (
  resNum varchar(255),
  FName varchar(255),
  LName varchar(255),
- carType varchar(255),
- licensePlate varchar(255),
+ ticketNum varchar(255),
  phone varchar(255),
  email varchar(255),
  address varchar(255),
  city varchar(255),
  state varchar(255),
  zipcode varchar(255),
- PRIMARY KEY (guestNum));
+ PRIMARY KEY (guestNum),
+ FOREIGN KEY (resNum) REFERENCES RESERVATION,
+ FOREIGN KEY (ticketNum) REFERENCES VALETSERVICE);
 
 START TRANSACTION;
- INSERT INTO GUEST (guestNum, resNum, FName, LName, carType, licensePlate, phone, email, address, city, state, zipcode) VALUES  ("1613364770", "719726322", "Benton", "Ernser", "Ford Focus", "4B4-221", "(862)542-7482", "ashtyn97@huels.com", "42866 Bernier Creek", "Herminaview", "Oklahoma", "65177");
- INSERT INTO GUEST (guestNum, resNum, FName, LName, carType, licensePlate, phone, email, address, city, state, zipcode) VALUES  ("346385419", "1215322034", "Kaden", "Bashirian", "Mazda 6", "AL1-3SS", "(973)974-0031", "sally47@rath.com", "741 Dickens Courts Apt. 409", "North Myrl", "Tennessee", "73486");
- INSERT INTO GUEST (guestNum, resNum, FName, LName, carType, licensePlate, phone, email, address, city, state, zipcode) VALUES  ("964909979", "576836280", "Coleman", "Beahan", "Jeep Wrangler", "110-2BG", "(917)332-2311", "shanahan.dorris@murphy.org", "2027 Okuneva Falls", "North Eleanoreton", "California", "59009");
- INSERT INTO GUEST (guestNum, resNum, FName, LName, carType, licensePlate, phone, email, address, city, state, zipcode) VALUES  ("520917390", "1980432982", "Kamryn", "Fisher", "Toyota Prius", "5LP-OBG", "(212)980-3392", "regan.romaguera@cronin.org", "44026 Eleanore Landing", "Maximeland", "Nebraska", "39516");
- INSERT INTO GUEST (guestNum, resNum, FName, LName, carType, licensePlate, phone, email, address, city, state, zipcode) VALUES  ("1920503518", "2070654177", "Emelia", "Deckow", "BMW 328i", "1BN-NMJ", "(732)389-7014", "lrippin@pacocha.info", "770 Lavonne Junctions Suite 591", "Vonchester", "Oregon", "09572-7045");
+ INSERT INTO GUEST (guestNum, resNum, FName, LName, ticketNum, phone, email, address, city, state, zipcode) VALUES  ("1613364770", "719726322", "Benton", "Ernser", "6382738", "(862)542-7482", "ashtyn97@huels.com", "42866 Bernier Creek", "Herminaview", "Oklahoma", "65177");
+ INSERT INTO GUEST (guestNum, resNum, FName, LName, ticketNum, phone, email, address, city, state, zipcode) VALUES  ("346385419", "1215322034", "Kaden", "Bashirian", "2628276", "(973)974-0031", "sally47@rath.com", "741 Dickens Courts Apt. 409", "North Myrl", "Tennessee", "73486");
+ INSERT INTO GUEST (guestNum, resNum, FName, LName, ticketNum, phone, email, address, city, state, zipcode) VALUES  ("964909979", "576836280", "Coleman", "Beahan", "7393657", "(917)332-2311", "shanahan.dorris@murphy.org", "2027 Okuneva Falls", "North Eleanoreton", "California", "59009");
+ INSERT INTO GUEST (guestNum, resNum, FName, LName, ticketNum, phone, email, address, city, state, zipcode) VALUES  ("520917390", "1980432982", "Kamryn", "Fisher", "9036271", "(212)980-3392", "regan.romaguera@cronin.org", "44026 Eleanore Landing", "Maximeland", "Nebraska", "39516");
+ INSERT INTO GUEST (guestNum, resNum, FName, LName, ticketNum, phone, email, address, city, state, zipcode) VALUES  ("1920503518", "2070654177", "Emelia", "1728465", "1BN-NMJ", "(732)389-7014", "lrippin@pacocha.info", "770 Lavonne Junctions Suite 591", "Vonchester", "Oregon", "09572-7045");
 COMMIT;
 
 -- RESERVATION TABLE
@@ -130,7 +137,9 @@ CREATE TABLE RESERVATION (
  checkIn varchar(255),
  checkOut varchar(255),
  roomNum varchar(255),
- PRIMARY KEY (resNum));
+ PRIMARY KEY (resNum),
+ FOREIGN KEY (guestNum) REFERENCES GUEST,
+ FOREIGN KEY (roomNum) REFERENCES ROOM);
 
 START TRANSACTION;
  INSERT INTO RESERVATION (resNum, guestNum, checkIn, checkOut, roomNum) VALUES  ("719726322", "1613364770", "2019-04-15", "2019-04-20", "101");
@@ -146,56 +155,62 @@ CREATE TABLE ROOM (
  typeNum varchar(255),
  floorNum varchar(255),
  cleaned varchar(255),
- PRIMARY KEY (roomNum));
+ resNum varchar(255),
+ PRIMARY KEY (roomNum),
+ FOREIGN KEY (typeNum) REFERENCES ROOMTYPE,
+ FOREIGN KEY (floorNum) REFERENCES FLOOR,
+ FOREIGN KEY (resNum) REFERENCES RESERVATION);
 
 START TRANSACTION;
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("101", "2134750372", "1", "0");
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("102", "273284596", "1", "1");
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("103", "2134750372", "1", "1");
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("104", "298379057", "1", "0");
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("105", "298379057", "1", "1");
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("106", "2134750372", "1", "");
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("201", "2134750372", "2", "1");
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("202", "298379057", "2", "0");
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("203", "2134750372", "2", "1");
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("204", "273284596", "2", "0");
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("205", "2134750372", "2", "1");
- INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned) VALUES  ("206", "273284596", "2", "0");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("101", "2134750372", "1", "0", "7291820");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("102", "273284596", "1", "1", "7294466");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("103", "2134750372", "1", "1", "7728846");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("104", "298379057", "1", "0", "6251142");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("105", "298379057", "1", "1", "7726142");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("106", "2134750372", "1", "0", "8271622");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("201", "2134750372", "2", "1", "0291012");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("202", "298379057", "2", "0", "7102658");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("203", "2134750372", "2", "1", "2615263");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("204", "273284596", "2", "0", "2815275");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("205", "2134750372", "2", "1", "2017294");
+ INSERT INTO ROOM (roomNum, typeNum, floorNum, cleaned, resNum) VALUES  ("206", "273284596", "2", "0", "1726575");
 
 COMMIT;
 
 -- FLOOR TABLE
 CREATE TABLE FLOOR (
  floorNum varchar(255),
- restaurantNum varchar(255),
- PRIMARY KEY (floorNum));
+ hotelNum varchar(255),
+ PRIMARY KEY (floorNum),
+ FOREIGN KEY (hotelNum) REFERENCES HOTEL);
 
 START TRANSACTION;
- INSERT INTO FLOOR (floorNum, restaurantNum) VALUES  ("1", "1993739448");
- INSERT INTO FLOOR (floorNum, restaurantNum) VALUES  ("1", "1387803850");
- INSERT INTO FLOOR (floorNum, restaurantNum) VALUES  ("2", "845405183");
+ INSERT INTO FLOOR (floorNum, hotelNum) VALUES  ("1", "19937394");
+ INSERT INTO FLOOR (floorNum, hotelNum) VALUES  ("1", "13878038");
+ INSERT INTO FLOOR (floorNum, hotelNum) VALUES  ("2", "84540518");
 COMMIT;
 
--- VALET TABLE
-CREATE TABLE VALET (
+-- VALETSERVICE TABLE
+CREATE TABLE VALETSERVICE (
  ticketNum varchar(255),
  lotNum varchar(255),
  spotNum varchar(255),
+ price FLOAT,
  PRIMARY KEY (ticketNum));
 
 START TRANSACTION;
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("651501065", "1", "111");
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("1942641746", "2", "212");
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("234573375", "2", "232");
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("922650012", "2", "214");
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("314471920", "1", "122");
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("1404240441", "1", "114");
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("1944778198", "1", "104");
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("1984128693", "1", "103");
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("277141507", "1", "105");
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("1515329838", "2", "211");
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("135603210", "2", "208");
- INSERT INTO VALET (ticketNum, lotNum, spotNum) VALUES  ("771266178", "2", "201");
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("651501065", "1", "111", 40.50);
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("1942641746", "2", "212", 40.00);
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("234573375", "2", "232", 50.00);
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("922650012", "2", "214", 70.00);
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("314471920", "1", "122", 70.00);
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("1404240441", "1", "114", 60.39);
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("1944778198", "1", "104", 60.39);
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("1984128693", "1", "103", 60.39);
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("277141507", "1", "105", 50.15);
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("1515329838", "2", "211", 50.15);
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("135603210", "2", "208", 40.25);
+ INSERT INTO VALETSERVICE (ticketNum, lotNum, spotNum, price) VALUES  ("771266178", "2", "201", 40.25);
 COMMIT;
 
 -- MENU TABLE
@@ -217,12 +232,16 @@ CREATE TABLE RESTAURANT (
  restaurantNum varchar(255),
  restaurantName varchar(255),
  menuNum varchar(255),
- PRIMARY KEY (restaurantNum));
+ floorNum varchar(255),
+ employeeNum varchar(255),
+ PRIMARY KEY (restaurantNum),
+ FOREIGN KEY (floorNum) REFERENCES FLOOR,
+ FOREIGN KEY (employeeNum) REFERENCES EMPLOYEE);
 
 START TRANSACTION;
- INSERT INTO RESTAURANT (restaurantNum, restaurantName, menuNum) VALUES  ("1993739448", "La Cucina", "1118202231");
- INSERT INTO RESTAURANT (restaurantNum, restaurantName, menuNum) VALUES  ("1387803850", "Hotel Cafe", "714713285");
- INSERT INTO RESTAURANT (restaurantNum, restaurantName, menuNum) VALUES  ("845405183", "Panther Bar & Grill", "1161730486");
+ INSERT INTO RESTAURANT (restaurantNum, restaurantName, menuNum, floorNum, employeeNum) VALUES  ("1993739448", "La Cucina", "1118202231", "28925517", "2910025162");
+ INSERT INTO RESTAURANT (restaurantNum, restaurantName, menuNum, floorNum, employeeNum) VALUES  ("1387803850", "Hotel Cafe", "714713285", "88263712", "9200162539");
+ INSERT INTO RESTAURANT (restaurantNum, restaurantName, menuNum, floorNum, employeeNum) VALUES  ("845405183", "Panther Bar & Grill", "1161730486", "72812264", "8291002533");
 COMMIT;
 
 -- ROOMSERVICE TABLE
@@ -230,7 +249,9 @@ CREATE TABLE ROOMSERVICE (
  orderNum varchar(255),
  roomNum varchar(255),
  restaurantNum varchar(255),
- PRIMARY KEY (orderNum));
+ PRIMARY KEY (orderNum),
+ FOREIGN KEY (roomNum) REFERENCES ROOM,
+ FOREIGN KEY (restaurantNum) REFERENCES RESTAURANT);
 
 START TRANSACTION;
  INSERT INTO ROOMSERVICE (orderNum, roomNum, restaurantNum) VALUES  ("289179810", "101", "1993739448");
