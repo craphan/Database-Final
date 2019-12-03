@@ -12,7 +12,7 @@ One hotel has one to many rooms.
 Each employee is assigned only one job;
 Each job can be assigned to zero to many employees.
 
-Each guest pays only one payment;
+Each guest pays zero to one payment;
 Each payment belongs to only one guest.
 
 Each guest makes one to many reservations;
